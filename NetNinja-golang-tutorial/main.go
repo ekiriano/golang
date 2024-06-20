@@ -74,9 +74,29 @@ func lessonThreeArraysAndSlices() {
 	fmt.Println(ages, len(ages))
 	fmt.Println(ages2, len(ages2))
 
+	// slices ( use arrays under the hood)
+	var scores = []int{100, 50, 60}
+	scores = append(scores, 3) // append return a new slice for us , so we have to do an assignment.
+	fmt.Println(scores, len(scores))
+
+	// slice ranges (get a range of elements to store in a new slice)
+	rangeOne := scores[1:3] // inclusive of the first number but exclusive of the last number.
+	fmt.Println(rangeOne)
+
+	rangeTwo := scores[1:] // goes up to the end of the slice
+	fmt.Print(rangeTwo)
+
+	rangeThree := scores[:3] //from the star to 3 not including
+	fmt.Println(rangeThree)
+}
+
+func lessonFourTheStandardLibray() {
+
 }
 
 func main() { // main function
 	// lessonOneVariables()
 	// lessonTwoPrintingAndFormattingStrings()
+	// lessonThreeArraysAndSlices()
+	lessonFourTheStandardLibray()
 }
