@@ -186,7 +186,7 @@ func LessonEightMultipleReturnValue() (int, int) {
 	return 1, 2
 }
 
-func LessonNineMaps() {
+func lessonNineMaps() {
 	// a bit like objects in javascript , all the keys in the single map must have the same type , same for the values
 
 	menu := map[string]float64{
@@ -245,6 +245,23 @@ func LessonTenPassByValue() {
 	fmt.Println(menu)
 }
 
+func updateNameMem(x *string) {
+	*x = "wedge"
+}
+
+func lessonElevenPointers() {
+	// pointers point to a memory location , it is also a type.
+
+	name := "tifa"
+	m := &name // gets the memory addresss with &
+	fmt.Println("Memory address of name is: ", m)
+	fmt.Println("value at memory address", *m)
+
+	updateNameMem(&name)
+
+	fmt.Println(name)
+}
+
 func main() { // main function
 	// lessonOneVariables()
 	// lessonTwoPrintingAndFormattingStrings()
@@ -254,6 +271,6 @@ func main() { // main function
 	// lessonSixBooleansAndConditionals()
 	// lessonSevenUsingFunctions()
 	// LessonNineMaps()
-
-	LessonTenPassByValue()
+	// LessonTenPassByValue()
+	lessonElevenPointers()
 }
