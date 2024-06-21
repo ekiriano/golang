@@ -1,6 +1,10 @@
 package main
 
-import "fmt" // fmt is a package from the package library.
+import (
+	"fmt" // fmt is a package from the package library.
+	"strings"
+)
+
 // fmt is for formating strings and printing to the console.
 
 func lessonOneVariables() {
@@ -91,12 +95,165 @@ func lessonThreeArraysAndSlices() {
 }
 
 func lessonFourTheStandardLibray() {
+	greeting := "hello there friends!"
+	fmt.Println(strings.Contains(greeting, "hello"))
+	fmt.Println(strings.ReplaceAll(greeting, "friends", "ninjas"))
+	fmt.Println(strings.ToUpper(greeting))
+	fmt.Println(strings.Index(greeting, "h"))
+	fmt.Println(strings.Split(greeting, " "))
+}
 
+func lessonFiveLoops() {
+	x := 0
+
+	for x < 5 {
+		fmt.Println("the value of x is:", x)
+		x++
+	}
+
+	for i := 0; i < 5; i++ {
+		fmt.Println("the value of i is:", i)
+	}
+
+	names := []string{"mario", "luigi", "peach"}
+
+	for i := 0; i < len(names); i++ {
+		fmt.Println(names[i])
+	}
+
+	for index, value := range names {
+		fmt.Printf("Index: %v , name: %v \n", index, value)
+		value = "test" // doesnt update the real value inside the original slice
+	}
+}
+
+func lessonSixBooleansAndConditionals() {
+	age := 45
+
+	fmt.Println(age <= 50)
+	fmt.Println(age >= 50)
+	fmt.Println(age == 50)
+	fmt.Println(age != 50)
+
+	if age < 30 {
+		fmt.Println("I'm under 30")
+	} else if age < 40 {
+		fmt.Println("age is elss than 40")
+	} else {
+		fmt.Println("Age is not less than 45")
+	}
+
+	names := []string{"mario", "luigi", "yoshi", "peach", "bowser"}
+
+	for index, value := range names {
+
+		if index == 1 {
+			fmt.Println("continuing at pos", index)
+			continue
+		}
+
+		fmt.Println("index,val", index, value)
+
+		if index == 3 {
+			fmt.Println("stopping at pos", index)
+			break
+		}
+	}
+
+}
+
+func sayGreeting(name string) {
+	fmt.Println("Hello, ", name)
+}
+
+func sayBye(name string) {
+	fmt.Println("Goodbye, ", name)
+}
+
+func cycleNames(n []string, f func(string)) {
+	for _, v := range n {
+		f(v)
+	}
+}
+
+func lessonSevenUsingFunctions() {
+	sayGreeting("Amine")
+	sayBye("Amine")
+	cycleNames([]string{"one", "two", "three"}, sayGreeting)
+}
+
+func LessonEightMultipleReturnValue() (int, int) {
+	return 1, 2
+}
+
+func LessonNineMaps() {
+	// a bit like objects in javascript , all the keys in the single map must have the same type , same for the values
+
+	menu := map[string]float64{
+		"soup":           4.99,
+		"pie":            7.99,
+		"salad":          6.99,
+		"toffee pudding": 3.55,
+	}
+
+	fmt.Println(menu)
+	fmt.Println(menu["pie"])
+
+	// looping maps
+	for k, v := range menu {
+		fmt.Println(k, "-", v)
+	}
+
+	// ints as key type
+	phonebook := map[int]string{
+		267584967:   "mario",
+		2675823237:  "luigi",
+		26758223327: "bowser",
+	}
+
+	fmt.Println(phonebook)
+}
+
+func updateName(x string) string {
+	x = "wedge"
+	return x
+}
+
+func updateMenu(y map[string]float64) {
+	y["coffee"] = 5.99
+}
+
+func LessonTenPassByValue() {
+	// Go is known as a pass by value language,
+	// go makes "copies" of values when passed into functions.
+	//
+	// Group A: strings, ints , floats , booleans , arrays , string (non pointer values)
+	// Group B : slices , maps , functions (pointer Wrapper values)
+
+	name := "tifa"
+	name = updateName(name)
+	fmt.Println(name)
+
+	menu := map[string]float64{
+		"soup":           4.99,
+		"pie":            7.99,
+		"salad":          6.99,
+		"toffee pudding": 3.55,
+	}
+
+	updateMenu(menu)
+	fmt.Println(menu)
 }
 
 func main() { // main function
 	// lessonOneVariables()
 	// lessonTwoPrintingAndFormattingStrings()
 	// lessonThreeArraysAndSlices()
-	lessonFourTheStandardLibray()
+	// lessonFourTheStandardLibray()
+	// lessonFiveLoops()
+	// lessonSixBooleansAndConditionals()
+	// lessonSevenUsingFunctions()
+	// LessonNineMaps()
+
+	LessonTenPassByValue()
 }
