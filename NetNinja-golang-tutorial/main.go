@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt" // fmt is a package from the package library.
+	"strconv"
 	"strings"
 )
 
@@ -262,6 +263,56 @@ func lessonElevenPointers() {
 	fmt.Println(name)
 }
 
+type bill struct {
+	name  string
+	items map[string]float64
+	tip   float64
+}
+
+// make new bills
+func newBill(name string) bill {
+	b := bill{
+		name:  name,
+		items: map[string]float64{},
+		tip:   0,
+	}
+	return b
+}
+
+// Format receiver function. (b bill) is a copy of the bill that we're passing into the receiver function.
+func (b *bill) format() string {
+	fs := "Bill breakown: \n"
+
+	var total float64 = 0
+
+	for key, value := range b.items {
+
+		fs += fmt.Sprintf("%-25v ...$%v \n", key+":", value) // -25v makes the value 25 characters even if value is less than two characters.
+		total += value
+	}
+
+	fs += fmt.Sprintf("Total: %-25v \n", total)
+	return fs
+}
+
+func (b *bill) updateTip(tip float64) {
+	b.tip = tip // if it's a struct we don't need to dereference the pointer.
+}
+
+func (b *bill) addItem(name string, price float64) {
+	b.items[name] = price
+}
+
+func lessonTwelveStructsAndCustomTypes() {
+	mybill := newBill("mario's bill")
+	fmt.Println(mybill)
+}
+
+func lessonThirtheenReceiverFunctions() {
+	myBill := newBill("Amine's bill")
+	fmt.Println(myBill.format()) // receiver function
+}
+
 func main() { // main function
 	// lessonOneVariables()
 	// lessonTwoPrintingAndFormattingStrings()
@@ -272,5 +323,14 @@ func main() { // main function
 	// lessonSevenUsingFunctions()
 	// LessonNineMaps()
 	// LessonTenPassByValue()
-	lessonElevenPointers()
+	// lessonElevenPointers()
+	// lessonTwelveStructsAndCustomTypes()
+	// lessonThirtheenReceiverFunctions()
+
+	p, err := strconv.ParseFloat("1.222", 64)
+	if err != nil {
+		fmt.Println("The price must be a number")
+	} else {
+		fmt.Println("The price is: ", p)
+	}
 }
